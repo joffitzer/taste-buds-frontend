@@ -4,6 +4,26 @@ import { connect as cnx } from 'react-redux';
 
 class Restaurant extends React.Component {
 
+    state = {
+        isLiked: false
+    }
+
+    componentDidMount(){
+        if (this.props.loggedInUser.id > 0) {
+            let likes = this.props.loggedInUser.attributes.likes
+            let restaurantsLiked = likes.map(likeObj => likeObj.restaurant_id)
+            if (restaurantsLiked.includes(parseInt(this.props.id))){
+                this.setState({
+                    isLiked: true
+                })
+            } else {
+                this.setState({
+                    isLiked: false
+                })
+            }
+        } 
+    }
+
     handleLike = () => {
         console.log("clicking like button")
         fetch('http://localhost:3000/api/v1/likes', {
@@ -17,6 +37,9 @@ class Restaurant extends React.Component {
             })
           })
           .then(response => console.log(response))
+          .then(this.setState({
+              isLiked: true
+          }))
     }
 
     handleRemoveLike = () => {
@@ -32,25 +55,32 @@ class Restaurant extends React.Component {
             })
           })
           .then(response => console.log(response))
+          .then(this.setState({
+              isLiked: false
+          }))
     }
 
     render(){
 
         console.log('props of restaurant: ', this.props)
 
-        let isLiked
-        let likes 
-        let restaurantsLiked
+        // let isLiked
+        // let likes 
+        // let restaurantsLiked
 
-        if (this.props.loggedInUser.id > 0) {
-            likes = this.props.loggedInUser.attributes.likes
-            restaurantsLiked = likes.map(likeObj => likeObj.restaurant_id)
-            if (restaurantsLiked.includes(parseInt(this.props.id))){
-                isLiked = true
-            } else {
-                isLiked = false
-            }
-        } 
+        // if (this.props.loggedInUser.id > 0) {
+        //     likes = this.props.loggedInUser.attributes.likes
+        //     restaurantsLiked = likes.map(likeObj => likeObj.restaurant_id)
+        //     if (restaurantsLiked.includes(parseInt(this.props.id))){
+        //         this.setState({
+        //             isLiked: true
+        //         })
+        //     } else {
+        //         this.setState({
+        //             isLiked: false
+        //         })
+        //     }
+        // } 
 
         
         return(
@@ -60,10 +90,11 @@ class Restaurant extends React.Component {
                 <h4>{this.props.restaurant.neighborhood}</h4>
                 <h5>{this.props.restaurant.cuisine}</h5>
                 <a href={this.props.restaurant.link}>Click here to read {this.props.restaurant.author}'s review of {this.props.restaurant.name}</a><br />
-                {isLiked ? 
-                    <button onClick={this.handleLike}>Click here to like this restaurant</button>
-                    :
+                {this.state.isLiked ? "You've liked this restaurant" : ""}
+                {this.state.isLiked ? 
                     <button onClick={this.handleRemoveLike}>Click here to unlike this restaurant</button>
+                    :
+                    <button onClick={this.handleLike}>Click here to like this restaurant</button>
                 }
                 <hr />
             </div>
