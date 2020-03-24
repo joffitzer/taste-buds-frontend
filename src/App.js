@@ -2,7 +2,7 @@ import React from 'react';
 import MainContainer from './containers/MainContainer';
 import Navbar from './components/Navbar'
 import { connect as cnx } from 'react-redux';
-import { getRestaurants, getUsers } from './actionCreators'
+import { getRestaurants, getUsers, logInUser } from './actionCreators'
 
 class App extends React.Component {
 
@@ -17,6 +17,7 @@ class App extends React.Component {
         .then(users => {
             this.props.getUsers(users)
         }))
+        .then(() => this.props.logInUser(this.props.allUsers[0]))
     }
 
   render(){
@@ -31,16 +32,17 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  let { allRestaurants } = state;
+  let { allRestaurants, allUsers } = state;
   return {
-    allRestaurants
+    allRestaurants, allUsers
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getRestaurants: (restaurants) => dispatch(getRestaurants(restaurants)),
-    getUsers: (users) => dispatch(getUsers(users))
+    getUsers: (users) => dispatch(getUsers(users)),
+    logInUser: (user) => dispatch(logInUser(user))
   }
 }
 
