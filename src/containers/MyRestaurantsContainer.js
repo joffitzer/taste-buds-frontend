@@ -18,25 +18,25 @@ class MyRestaurantsContainer extends React.Component {
             .then(res => {
                 let myLikes
                 if(this.props.allLikes){
-                    myLikes = this.props.allLikes.filter(likeObj => (this.props.loggedInUser.id === likeObj.attributes.user.user.id))
-                    myLikes = this.props.allLikes.map(likeObj => {
+                    myLikes = this.props.allLikes.filter(likeObj => (parseInt(this.props.loggedInUser.id) === parseInt(likeObj.attributes.user.user.id)))
+                    myLikes = myLikes.map(likeObj => {
                         return likeObj.attributes.restaurant.restaurant.id
                     })
                 }
 
-                let likedRestaurants;
+                console.log('my likes should be uncle boons restaurant id: ', myLikes)
 
                 if (myLikes.length > 0){
 
                     if (this.props.allRestaurants){
 
-                        return likedRestaurants = this.props.allRestaurants.filter(restaurantObj => myLikes.includes(parseInt(restaurantObj.id)))
+                        return this.props.allRestaurants.filter(restaurantObj => myLikes.includes(parseInt(restaurantObj.id)))
                     } 
                 }
             })
-            .then(likedRestaurants => {
+            .then(myLikedRestaurants => {
                 this.setState({
-                    likedRestaurants: likedRestaurants
+                    likedRestaurants: myLikedRestaurants
                 })
             })
     }
