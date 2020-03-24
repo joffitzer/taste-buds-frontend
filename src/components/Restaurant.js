@@ -9,13 +9,11 @@ class Restaurant extends React.Component {
     }
 
     componentDidMount(){
-
         fetch ('http://localhost:3000/api/v1/likes')
             .then(res => res.json())
             .then(likes => {
                 this.props.getLikes(likes)
             })
-            // .then(() => console.log('all likes: ', this.props.allLikes))
             .then(res => {
                 return this.props.allLikes.filter(likeObj => (parseInt(likeObj.attributes.user.user.id) === parseInt(this.props.loggedInUser.id)))
             })
@@ -36,43 +34,7 @@ class Restaurant extends React.Component {
                     })
                 }
             }
-
-            )
-                
-            //     myLikes.map(likeObj => {
-            //         console.log('restaurant id on like obj: ', likeObj.attributes.restaurant.restaurant.id)
-            //         console.log('restaurant id on props: ', this.props.id)
-
-            //         if (parseInt(likeObj.attributes.restaurant.restaurant.id) === parseInt(this.props.id)){
-            //             this.setState({
-            //                 isLiked: true
-            //             })
-            //         } else {
-            //             this.setState({
-            //                 isLiked: false
-            //             })
-            //         }
-            //     })
-            // })
-
-
-        //     .then((res) => {
-        //         let likes =this.props.allLikes.filter(likeObj => (this.props.loggedInUser.id === likeObj.attributes.user.user.id))
-        //         if (parseInt(this.props.loggedInUser.id) > 0) {
-        //             let likes = this.props.loggedInUser.attributes.likes
-        //             let restaurantsLiked = likes.map(likeObj => parseInt(likeObj.restaurant_id))
-        //             if (restaurantsLiked.includes(parseInt(this.props.id))){
-        //                 this.setState({
-        //                     isLiked: true
-        //                 })
-        //             } else {
-        //                 this.setState({
-        //                     isLiked: false
-        //                 })
-        //             }
-        //         } 
-        //     })
-
+        )
     }
 
     handleLike = () => {
@@ -96,6 +58,9 @@ class Restaurant extends React.Component {
     
     handleRemoveLike = () => {
         let likeToDelete
+        if (this.props.removeLike){
+            this.props.removeLike(this.props.id)
+        }
         fetch ('http://localhost:3000/api/v1/likes')
             .then(res => res.json())
             .then(likes => {
@@ -117,7 +82,7 @@ class Restaurant extends React.Component {
     }
 
     render(){
-
+        
         return(
             <div>
                 <h2>{this.props.restaurant.name}</h2>
