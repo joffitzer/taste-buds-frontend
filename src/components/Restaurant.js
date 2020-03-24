@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import { connect as cnx } from 'react-redux';
 import { getLikes } from '../actionCreators'
 
@@ -42,33 +42,58 @@ class Restaurant extends React.Component {
           .then(this.setState({
               isLiked: true
           }))
-          .then(fetch ('http://localhost:3000/api/v1/likes')
-          .then(res => res.json())
-          .then(likes => {
-              this.props.getLikes(likes)
-          }))
+        //   .then(
+        //       fetch ('http://localhost:3000/api/v1/likes')
+        //         .then(res => res.json())
+        //         .then(likes => {
+        //             console.log('likes that are being passed to the this.props.getlikes action: ', likes)
+        //             this.props.getLikes(likes)
+        //         }))
+        //   .then(console.log('all likes after liking: ', this.props.allLikes))
     }
 
+    
     handleRemoveLike = () => {
-        console.log("removing like")
-        let likeToDelete = this.props.allLikes.find(likeObj => (likeObj.attributes.restaurant.restaurant.id === parseInt(this.props.id)) && (likeObj.attributes.user.user.id === parseInt(this.props.loggedInUser.id)))
-        console.log('like to delete: ', likeToDelete)
-        fetch(`http://localhost:3000/api/v1/likes/${likeToDelete.id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json', 
-                'Accept': 'application/json'}
-          })
-          .then(response => console.log(response))
-          .then(this.setState({
-              isLiked: false
-          }))
+        let likeToDelete
+        fetch ('http://localhost:3000/api/v1/likes')
+            .then(res => res.json())
+            .then(likes => {
+                console.log('likes that are being passed to the this.props.getlikes action: ', likes)
+                this.props.getLikes(likes)
+            })
+            .then(res => {
+                likeToDelete = this.props.allLikes.find(likeObj => (likeObj.attributes.restaurant.restaurant.id === parseInt(this.props.id)) && (likeObj.attributes.user.user.id === parseInt(this.props.loggedInUser.id)))
+                console.log('liketodelete: ', likeToDelete)
+                return likeToDelete;
+            })
+            .then(likeToDelete => {
+                fetch(`http://localhost:3000/api/v1/likes/${parseInt(likeToDelete.id)}`, {
+                    method: 'DELETE'
+                })
+            })
+            .then(response => console.log(response))
+            .then(this.setState({
+                isLiked: false
+            }))
+        // )
+        // let likeToDelete = this.props.allLikes.find(likeObj => (likeObj.attributes.restaurant.restaurant.id === parseInt(this.props.id)) && (likeObj.attributes.user.user.id === parseInt(this.props.loggedInUser.id)))
+        // console.log('like to delete: ', likeToDelete)
+        // fetch(`http://localhost:3000/api/v1/likes/${likeToDelete.id}`, {
+        //     method: 'DELETE',
+        //     headers: {
+        //         'Content-Type': 'application/json', 
+        //         'Accept': 'application/json'}
+        //   })
+        //   .then(response => console.log(response))
+        //   .then(this.setState({
+        //       isLiked: false
+        //   }))
     }
 
     render(){
 
-        console.log('props of restaurant: ', this.props)
-        
+        // console.log('props of restaurant: ', this.props)
+
         return(
             <div>
                 <h2>{this.props.restaurant.name}</h2>
