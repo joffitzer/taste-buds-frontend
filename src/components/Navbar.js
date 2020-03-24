@@ -7,13 +7,10 @@ class Navbar extends React.Component{
     
     render(){
         console.log('props of navbar: ', this.props)
-
         let jonah 
-
         if (this.props.allUsers) {
             jonah = this.props.allUsers[0]
         } 
-
         return(
             <div>
                 <button onClick={() => this.props.logInUser(jonah)}>Log In as Jonah</button>
