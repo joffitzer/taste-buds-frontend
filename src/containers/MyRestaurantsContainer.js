@@ -24,8 +24,6 @@ class MyRestaurantsContainer extends React.Component {
                     })
                 }
 
-                console.log('my likes should be uncle boons restaurant id: ', myLikes)
-
                 if (myLikes.length > 0){
 
                     if (this.props.allRestaurants){
