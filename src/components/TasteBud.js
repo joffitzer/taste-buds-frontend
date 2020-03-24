@@ -5,7 +5,9 @@ class TasteBud extends React.Component {
 
     render(){
 
-        // let restaurants;
+        this.props.user.attributes.likes.map(likeObj => {
+            console.log('like obj in taste bud: ', likeObj)
+        })
 
         // if (this.props.allRestaurants){
         //     restaurants = this.props.allRestaurants.map(restaurantObj => {
@@ -19,6 +21,8 @@ class TasteBud extends React.Component {
                 <h3>{this.props.user.attributes.first_name}</h3>
                 <img className="restaurantImg" src={this.props.user.attributes.img} alt={this.props.user.attributes.first_name}/>
                 <h5> Favorite Cuisine: {this.props.user.attributes.fav_cuisine}</h5>
+                <h5> Likes: {this.props.user.attributes.fav_cuisine}</h5>
+                <hr /> 
             </div>
         )
     }

@@ -82,6 +82,8 @@ class Restaurant extends React.Component {
     }
 
     render(){
+
+        console.log('logged in user', this.props.loggedInUser)
         
         return(
             <div>

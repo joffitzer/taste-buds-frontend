@@ -7,11 +7,12 @@ class Navbar extends React.Component{
 
     
     render(){
-        
+
         let jonah 
         if (this.props.allUsers) {
             jonah = this.props.allUsers[0]
         } 
+
         return(
             <div>
                 <button onClick={() => this.props.logInUser(jonah)}>Log In as Jonah</button><br />
@@ -20,6 +21,7 @@ class Navbar extends React.Component{
                 <Link to="/my-taste-buds">My Taste Buds</Link><br />
             </div>
         )
+        
     }
 }
   

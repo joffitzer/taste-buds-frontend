@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect as cnx } from 'react-redux';
-import { getUsers } from '../actionCreators'
+import { getUsers, logInUser } from '../actionCreators'
 import TasteBud from '../components/TasteBud'
 
 class TasteBudsContainer extends React.Component {
@@ -15,11 +15,17 @@ class TasteBudsContainer extends React.Component {
             .then(users => {
                 this.props.getUsers(users)
             })
+            .then(this.setState({
+                myBuds: []
+            }))
             .then(res => {
+
+                this.props.logInUser(this.props.allUsers[0])
 
                 let myLikeCounter = {}
 
                 if (this.props.loggedInUser){
+                    console.log('the logged in user is: ', this.props.loggedInUser)
                     this.props.loggedInUser.attributes.likes.map(likeObj => {
                         myLikeCounter[likeObj.restaurant_id] = true
                     })
@@ -85,7 +91,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      getUsers: (users) => dispatch(getUsers(users))
+      getUsers: (users) => dispatch(getUsers(users)),
+      logInUser: (user) => dispatch(logInUser(user))
     }
   }
 
