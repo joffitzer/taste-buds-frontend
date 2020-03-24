@@ -1,8 +1,13 @@
 import React from 'react'
 import { connect as cnx } from 'react-redux';
 import { getUsers } from '../actionCreators'
+import TasteBud from '../components/TasteBud'
 
 class TasteBudsContainer extends React.Component {
+
+    state = {
+        myBuds: []
+    }
 
     componentDidMount(){
         fetch ('http://localhost:3000/api/v1/users')
@@ -10,50 +15,62 @@ class TasteBudsContainer extends React.Component {
             .then(users => {
                 this.props.getUsers(users)
             })
+            .then(res => {
+
+                let myLikeCounter = {}
+
+                if (this.props.loggedInUser){
+                    this.props.loggedInUser.attributes.likes.map(likeObj => {
+                        myLikeCounter[likeObj.restaurant_id] = true
+                    })
+                }
+        
+                console.log('my like counter: ', myLikeCounter)
+        
+                if (this.props.allUsers) {
+                    this.props.allUsers.map(user => {
+                        console.log('starting a new loop with this user: ', user)
+                        if (parseInt(user.id) !== parseInt(this.props.loggedInUser.id)){
+                            let userLikeCounter = {}
+                            user.attributes.likes.map(likeObj => {
+                                userLikeCounter[likeObj.restaurant_id] = true
+                            })
+            
+                            console.log('user like counter: ', userLikeCounter)
+                            let sameLikes = 0
+                            for (let key in myLikeCounter) {
+                                if (key in userLikeCounter){
+                                    sameLikes += 1
+                                }
+                                if (sameLikes > 1) {
+                                    console.log('user before i add it to mybuds in state: ', user)
+                                    if (!(this.state.myBuds.includes(user))){
+                                        this.setState({
+                                            myBuds: [...this.state.myBuds, user]
+                                        })
+                                    }
+                                }
+                            }
+                        }
+                    })
+                }
+            })
     }
 
     render(){
 
-        let myBuds = []
-        let myLikeCounter = {}
+        let tasteBuds
 
-        if (this.props.loggedInUser){
-            this.props.loggedInUser.attributes.likes.map(likeObj => {
-                myLikeCounter[likeObj.restaurant_id] = true
-            })
-        }
+        if (this.state.myBuds.length > 0){
+            tasteBuds = this.state.myBuds.map(userObj => {
+            return <TasteBud id={userObj.id} user={userObj} key={userObj.id}/>
+        })} 
 
-        console.log('my like counter: ', myLikeCounter)
-
-        if (this.props.allUsers) {
-            this.props.allUsers.forEach(user => {
-                if (parseInt(user.id) !== parseInt(this.props.loggedInUser.id)){
-                    // console.log('user in for each: ', user)
-                    let userLikeCounter = {}
-                    user.attributes.likes.map(likeObj => {
-                        userLikeCounter[likeObj.restaurant_id] = true
-                    })
-    
-                    console.log('user like counter: ', userLikeCounter)
-                    let sameLikes = 0
-                    for (let key in myLikeCounter) {
-                        if (key in userLikeCounter){
-                            sameLikes += 1
-                        }
-                        if (sameLikes > 1) {
-                            myBuds.push(user)
-                        }
-                    }
-                }
-            })
-        }
-
-        console.log('my buds array - with two or more of the same likes: ', myBuds)
 
         return(
             <div>
                 <h1>My Taste Buds</h1>
-                {/* {restaurants} */}
+                {tasteBuds}
             </div>
         )
     }
