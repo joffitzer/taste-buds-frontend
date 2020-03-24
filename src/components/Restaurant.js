@@ -2,22 +2,38 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import { connect as cnx } from 'react-redux';
 
-const Restaurant = (props) => {
+class Restaurant extends React.Component {
 
-    console.log('restaurant props: ', props)
-    return(
-        <div>
-            <h5>Restaurant Name: {props.restaurant.name}</h5>
-            <img className="restaurantImg" src={props.restaurant.img} alt={props.restaurant.name}/>
-            <h5>Neighborhood: {props.restaurant.neighborhood}</h5>
-            <h5>Cuisine: {props.restaurant.cuisine}</h5>
-            <h5>Link: {props.restaurant.link}</h5>
-            <h5>Author: {props.restaurant.author}</h5>
-            <h5>Rating: {props.restaurant.rating}</h5>
-        </div>
-    )
+    state = {
+        isLiked: false
+    }
+
+    handleLike = () => {
+        console.log("clicking like button")
+        //send post
+    }
+
+    handleRemoveLike = () => {
+        console.log("removing like")
+    }
+
+    render(){
+        return(
+            <div>
+                <h2>{this.props.restaurant.name}</h2>
+                <img className="restaurantImg" src={this.props.restaurant.img} alt={this.props.restaurant.name}/>
+                <h4>{this.props.restaurant.neighborhood}</h4>
+                <h5>{this.props.restaurant.cuisine}</h5>
+                <a href={this.props.restaurant.link}>Click here to read {this.props.restaurant.author}'s review of {this.props.restaurant.name}</a><br />
+                {this.state.isLiked ? 
+                    <button onClick={this.handleLike}>Click here to like this restaurant</button>
+                    :
+                    <button onClick={this.handleRemoveLike}>Click here to unlike this restaurant</button>
+                }
+                <hr />
+            </div>
+        )
+    }
 }
-
-// export default cnx(null, mapDispatchToProps)(Restaurant);
 
 export default Restaurant;

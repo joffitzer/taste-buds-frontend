@@ -1,7 +1,8 @@
 import React from 'react';
 import MainContainer from './containers/MainContainer';
+import Navbar from './components/Navbar'
 import { connect as cnx } from 'react-redux';
-import { getRestaurants } from './actionCreators'
+import { getRestaurants, getUsers } from './actionCreators'
 
 class App extends React.Component {
 
@@ -11,11 +12,18 @@ class App extends React.Component {
         .then(restaurants => {
             this.props.getRestaurants(restaurants)
         })
+        .then(fetch ('http://localhost:3000/api/v1/users')
+        .then(res => res.json())
+        .then(users => {
+            this.props.getUsers(users)
+        }))
     }
 
   render(){
+
     return (
       <div>
+        <Navbar />
         <MainContainer />
       </div>
     );
@@ -31,7 +39,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getRestaurants: (restaurants) => dispatch(getRestaurants(restaurants))
+    getRestaurants: (restaurants) => dispatch(getRestaurants(restaurants)),
+    getUsers: (users) => dispatch(getUsers(users))
   }
 }
 
