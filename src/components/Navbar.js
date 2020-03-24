@@ -1,22 +1,23 @@
 import React from 'react'
 import { connect as cnx } from 'react-redux';
 import { logInUser } from '../actionCreators'
+import {Link} from 'react-router-dom'
 
 class Navbar extends React.Component{
 
     
     render(){
-        console.log('props of navbar: ', this.props)
+        
         let jonah 
         if (this.props.allUsers) {
             jonah = this.props.allUsers[0]
         } 
         return(
             <div>
-                <button onClick={() => this.props.logInUser(jonah)}>Log In as Jonah</button>
-                <p>All Restaurants</p>
-                <p>My Liked Restaurants</p>
-                <p>My Taste Buds</p>
+                <button onClick={() => this.props.logInUser(jonah)}>Log In as Jonah</button><br />
+                <Link to="/restaurants">All Restaurants</Link><br />
+                <Link to="/my-restaurants">My Liked Restaurants</Link><br />
+                <Link to="/my-taste-buds">My Taste Buds</Link><br />
             </div>
         )
     }

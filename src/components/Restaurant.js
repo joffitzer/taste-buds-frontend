@@ -1,5 +1,4 @@
 import React from 'react'
-// import {Link} from 'react-router-dom'
 import { connect as cnx } from 'react-redux';
 import { getLikes } from '../actionCreators'
 
@@ -10,19 +9,26 @@ class Restaurant extends React.Component {
     }
 
     componentDidMount(){
-        if (parseInt(this.props.loggedInUser.id) > 0) {
-            let likes = this.props.loggedInUser.attributes.likes
-            let restaurantsLiked = likes.map(likeObj => parseInt(likeObj.restaurant_id))
-            if (restaurantsLiked.includes(parseInt(this.props.id))){
-                this.setState({
-                    isLiked: true
-                })
-            } else {
-                this.setState({
-                    isLiked: false
-                })
-            }
-        } 
+        fetch ('http://localhost:3000/api/v1/likes')
+            .then(res => res.json())
+            .then(likes => {
+                this.props.getLikes(likes)
+            })
+            .then(() => {
+                if (parseInt(this.props.loggedInUser.id) > 0) {
+                    let likes = this.props.loggedInUser.attributes.likes
+                    let restaurantsLiked = likes.map(likeObj => parseInt(likeObj.restaurant_id))
+                    if (restaurantsLiked.includes(parseInt(this.props.id))){
+                        this.setState({
+                            isLiked: true
+                        })
+                    } else {
+                        this.setState({
+                            isLiked: false
+                        })
+                    }
+                } 
+            })
 
     }
 
@@ -42,14 +48,6 @@ class Restaurant extends React.Component {
           .then(this.setState({
               isLiked: true
           }))
-        //   .then(
-        //       fetch ('http://localhost:3000/api/v1/likes')
-        //         .then(res => res.json())
-        //         .then(likes => {
-        //             console.log('likes that are being passed to the this.props.getlikes action: ', likes)
-        //             this.props.getLikes(likes)
-        //         }))
-        //   .then(console.log('all likes after liking: ', this.props.allLikes))
     }
 
     
@@ -58,7 +56,6 @@ class Restaurant extends React.Component {
         fetch ('http://localhost:3000/api/v1/likes')
             .then(res => res.json())
             .then(likes => {
-                console.log('likes that are being passed to the this.props.getlikes action: ', likes)
                 this.props.getLikes(likes)
             })
             .then(res => {
@@ -71,28 +68,12 @@ class Restaurant extends React.Component {
                     method: 'DELETE'
                 })
             })
-            .then(response => console.log(response))
             .then(this.setState({
                 isLiked: false
             }))
-        // )
-        // let likeToDelete = this.props.allLikes.find(likeObj => (likeObj.attributes.restaurant.restaurant.id === parseInt(this.props.id)) && (likeObj.attributes.user.user.id === parseInt(this.props.loggedInUser.id)))
-        // console.log('like to delete: ', likeToDelete)
-        // fetch(`http://localhost:3000/api/v1/likes/${likeToDelete.id}`, {
-        //     method: 'DELETE',
-        //     headers: {
-        //         'Content-Type': 'application/json', 
-        //         'Accept': 'application/json'}
-        //   })
-        //   .then(response => console.log(response))
-        //   .then(this.setState({
-        //       isLiked: false
-        //   }))
     }
 
     render(){
-
-        // console.log('props of restaurant: ', this.props)
 
         return(
             <div>

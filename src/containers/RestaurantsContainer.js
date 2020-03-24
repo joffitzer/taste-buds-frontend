@@ -9,7 +9,7 @@ class RestaurantsContainer extends React.Component {
 
         if (this.props.allRestaurants){
             restaurants = this.props.allRestaurants.map(restaurantObj => {
-            return <Restaurant id={restaurantObj.id} restaurant={restaurantObj.attributes}/>
+            return <Restaurant id={restaurantObj.id} restaurant={restaurantObj.attributes} key={restaurantObj.id}/>
         })} 
 
         return(
