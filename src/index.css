@@ -70,6 +70,32 @@ code {
   font-size: xx-large;
 }
 
+.navtext {
+  margin-top: 20px;;
+}
+
+.navlogo{
+  width: 75px;
+  height: 60px;
+  overflow: hidden;
+  margin-top: -5px;
+}
+
+.centerlogo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* transform:  */
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  transform: scale(0.5);
+}
+
 /* .tastebuddiv {
   height: 400px;
 } */

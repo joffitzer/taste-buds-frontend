@@ -14,7 +14,7 @@ class RestaurantsContainer extends React.Component {
 
         return(
             <div class="containerdiv">
-                <h1>All Restaurants</h1>
+                <h1 class="headertext">All Restaurants</h1>
                 {restaurants}
             </div>
         )

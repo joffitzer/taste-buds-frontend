@@ -58,7 +58,7 @@ class MyRestaurantsContainer extends React.Component {
 
         return(
             <div class="containerdiv">
-                <h1>My Liked Restaurants</h1>
+                <h1 class="headertext">My Liked Restaurants</h1>
                 {myRestaurants}
             </div>
         )
