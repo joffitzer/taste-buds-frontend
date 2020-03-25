@@ -14,11 +14,16 @@ class Navbar extends React.Component{
         } 
 
         return(
-            <div>
-                <button onClick={() => this.props.logInUser(jonah)}>Log In as Jonah</button><br />
-                <Link to="/restaurants">All Restaurants</Link><br />
-                <Link to="/my-restaurants">My Liked Restaurants</Link><br />
-                <Link to="/my-taste-buds">My Taste Buds</Link><br />
+            <div class="topnav">
+                
+                <Link to="/" onClick={() => this.props.logInUser(jonah)}>Log In as Jonah</Link>
+                
+                <Link to="/restaurants">All Restaurants</Link>
+                
+                <Link to="/my-restaurants">My Liked Restaurants</Link>
+                
+                <Link to="/my-taste-buds">My Taste Buds</Link>
+
             </div>
         )
         

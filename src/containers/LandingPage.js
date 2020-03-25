@@ -22,7 +22,7 @@ class LandingPage extends React.Component {
             <div>
                 {/* <Link to="/restaurants"><button onClick={() => this.props.logInUser(jonah)}>Log In as Jonah</button></Link><br /> */}
                 {/* <Link to="/restaurants"> */}
-                    <button onClick={() => this.props.logInUser(jonah)}>Log In as Jonah</button>
+                    {/* <button onClick={() => this.props.logInUser(jonah)}>Log In as Jonah</button> */}
                 {/* </Link><br /> */}
             </div>
         )
