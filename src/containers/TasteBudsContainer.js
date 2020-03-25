@@ -70,7 +70,9 @@ class TasteBudsContainer extends React.Component {
         if (this.state.myBuds.length > 0){
             tasteBuds = this.state.myBuds.map(userObj => {
             return <TasteBud id={userObj.id} user={userObj} key={userObj.id}/>
-        })} 
+        })} else {
+            tasteBuds = "You don't have any taste buds yet. Add a 'like' to some more restaurants to see your buds' recs!"
+        }
 
 
         return(

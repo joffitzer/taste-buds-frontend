@@ -21,9 +21,6 @@ class Restaurant extends React.Component {
                 return myLikes.map(likeObj => likeObj.attributes.restaurant.restaurant.id)
             })
             .then(likedIds => {
-                console.log('liked ids', likedIds)
-                console.log('this.props.id', this.props.id)
-
                 if (likedIds.includes(parseInt(this.props.id))){
                     this.setState({
                         isLiked: true
