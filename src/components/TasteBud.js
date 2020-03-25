@@ -24,11 +24,13 @@ class TasteBud extends React.Component {
         // console.log('liked restaurants: ', likedRestaurants)
 
         return(
-            <div>
-                <h3>{this.props.user.attributes.first_name}</h3>
-                <img className="restaurantImg" src={this.props.user.attributes.img} alt={this.props.user.attributes.first_name}/>
-                <h5> Favorite Cuisine: {this.props.user.attributes.fav_cuisine}</h5>
-                <h5> Recommendations: {recommendations}</h5>
+            <div className="tastebuddiv">
+                <h2>{this.props.user.attributes.first_name}</h2>
+                <img className="profilepic" src={this.props.user.attributes.img} alt={this.props.user.attributes.first_name}/>
+                <div className="tastebudtext">
+                    <h5> Favorite Cuisine: {this.props.user.attributes.fav_cuisine}</h5>
+                    <h5> Recommendations: {recommendations}</h5>      
+                </div>
                 <hr /> 
             </div>
         )

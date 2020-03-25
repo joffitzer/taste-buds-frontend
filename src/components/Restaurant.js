@@ -86,16 +86,18 @@ class Restaurant extends React.Component {
         return(
             <div>
                 <h2>{this.props.restaurant.name}</h2>
-                <img className="restaurantImg" src={this.props.restaurant.img} alt={this.props.restaurant.name}/>
-                <h4>{this.props.restaurant.neighborhood}</h4>
-                <h5>{this.props.restaurant.cuisine}</h5>
-                <a href={this.props.restaurant.link}>Click here to read {this.props.restaurant.author}'s review of {this.props.restaurant.name}</a><br />
-                {this.state.isLiked ? "You've liked this restaurant" : ""}
-                {this.state.isLiked ? 
-                    <button onClick={this.handleRemoveLike}>Change your mind? Click here to unlike</button>
-                    :
-                    <button onClick={this.handleLike}>Click here to like this restaurant</button>
-                }
+                <img className="profilepic" src={this.props.restaurant.img} alt={this.props.restaurant.name}/>
+                <div className="tastebudtext">
+                    <h4>{this.props.restaurant.neighborhood}</h4>
+                    <h5>{this.props.restaurant.cuisine}</h5>
+                    <a href={this.props.restaurant.link}>Click here to read {this.props.restaurant.author}'s review of {this.props.restaurant.name}</a><br />
+                    {this.state.isLiked ? "You've liked this restaurant" : ""}
+                    {this.state.isLiked ? 
+                        <button onClick={this.handleRemoveLike}>Change your mind? Click here to unlike</button>
+                        :
+                        <button onClick={this.handleLike}>Click here to like this restaurant</button>
+                    }
+                </div>
                 <hr />
             </div>
         )

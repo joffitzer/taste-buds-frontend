@@ -75,7 +75,7 @@ class TasteBudsContainer extends React.Component {
 
         return(
             <div class="containerdiv">
-                <h1>My Taste Buds</h1>
+                <h1 className="headertext">My Taste Buds</h1>
                 {tasteBuds}
             </div>
         )

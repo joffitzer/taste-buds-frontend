@@ -21,7 +21,7 @@ code {
 }
 
 .topnav {
-  background-color: rgb(12, 65, 209);
+  background-color: rgb(53, 104, 247);
   overflow: hidden;
 }
 
@@ -48,3 +48,35 @@ code {
   position: relative;
   left: 30px;
 }
+
+.profilepic {
+  position: relative;
+  width: 300px;     
+  height: 300px;
+  overflow: hidden;
+  object-fit: cover;
+  top: 50px;
+}
+
+.tastebudtext {
+  position: relative;
+  bottom: 200px;
+  left: 400px;
+  font-size: large;
+}
+
+.headertext {
+  color: rgb(53, 104, 247);
+  font-size: xx-large;
+}
+
+/* .tastebuddiv {
+  height: 400px;
+} */
+
+/* .tastebudtext {
+  position: relative;
+  bottom: 200px;
+  left: 400px;
+  font-size: large;
+} */
