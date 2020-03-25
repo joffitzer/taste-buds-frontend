@@ -57,7 +57,7 @@ class MyRestaurantsContainer extends React.Component {
         console.log('state of my restaurants container: ', this.state)
 
         return(
-            <div>
+            <div class="containerdiv">
                 <h1>My Liked Restaurants</h1>
                 {myRestaurants}
             </div>

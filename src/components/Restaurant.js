@@ -82,8 +82,6 @@ class Restaurant extends React.Component {
     }
 
     render(){
-
-        console.log('logged in user', this.props.loggedInUser)
         
         return(
             <div>
@@ -94,7 +92,7 @@ class Restaurant extends React.Component {
                 <a href={this.props.restaurant.link}>Click here to read {this.props.restaurant.author}'s review of {this.props.restaurant.name}</a><br />
                 {this.state.isLiked ? "You've liked this restaurant" : ""}
                 {this.state.isLiked ? 
-                    <button onClick={this.handleRemoveLike}>Click here to unlike this restaurant</button>
+                    <button onClick={this.handleRemoveLike}>Change your mind? Click here to unlike</button>
                     :
                     <button onClick={this.handleLike}>Click here to like this restaurant</button>
                 }

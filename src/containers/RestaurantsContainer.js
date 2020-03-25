@@ -13,7 +13,7 @@ class RestaurantsContainer extends React.Component {
         })} 
 
         return(
-            <div>
+            <div class="containerdiv">
                 <h1>All Restaurants</h1>
                 {restaurants}
             </div>

@@ -13,10 +13,10 @@ class LandingPage extends React.Component {
     
     render(){
 
-        let jonah 
-        if (this.props.allUsers) {
-            jonah = this.props.allUsers[0]
-        } 
+        // let jonah 
+        // if (this.props.allUsers) {
+        //     jonah = this.props.allUsers[0]
+        // } 
 
         return(
             <div>

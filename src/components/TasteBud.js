@@ -8,10 +8,6 @@ class TasteBud extends React.Component {
 
         let likedRestaurantIds = this.props.user.attributes.likes.map(likeObj => likeObj.restaurant_id)
 
-        // if (this.props.allRestaurants){
-        //     restaurants = this.props.allRestaurants.map(restaurantObj => {
-        //     return <Restaurant id={restaurantObj.id} restaurant={restaurantObj.attributes} key={restaurantObj.id}/>
-        // })} 
         let likedRestaurants
         if (this.props.allRestaurants){
             likedRestaurants = this.props.allRestaurants.filter(restaurantObj => (likedRestaurantIds.includes(parseInt(restaurantObj.id))))
@@ -24,8 +20,8 @@ class TasteBud extends React.Component {
             })
         }
 
-        console.log('props on tastebud: ', this.props)
-        console.log('liked restaurants: ', likedRestaurants)
+        // console.log('props on tastebud: ', this.props)
+        // console.log('liked restaurants: ', likedRestaurants)
 
         return(
             <div>
