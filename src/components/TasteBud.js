@@ -20,9 +20,6 @@ class TasteBud extends React.Component {
             })
         }
 
-        // console.log('props on tastebud: ', this.props)
-        // console.log('liked restaurants: ', likedRestaurants)
-
         return(
             <div className="tastebuddiv">
                 <h2>{this.props.user.attributes.first_name}</h2>
@@ -43,11 +40,5 @@ const mapStateToProps = (state) => {
       allRestaurants
     }
 }
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//       getRestaurants: (restaurants) => dispatch(getRestaurants(restaurants))
-//     }
-//   }
 
 export default cnx(mapStateToProps, null)(TasteBud);

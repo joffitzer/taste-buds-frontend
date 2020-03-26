@@ -25,31 +25,25 @@ class TasteBudsContainer extends React.Component {
                 let myLikeCounter = {}
 
                 if (this.props.loggedInUser){
-                    console.log('the logged in user is: ', this.props.loggedInUser)
                     this.props.loggedInUser.attributes.likes.map(likeObj => {
                         myLikeCounter[likeObj.restaurant_id] = true
                     })
                 }
         
-                console.log('my like counter: ', myLikeCounter)
-        
                 if (this.props.allUsers) {
                     this.props.allUsers.map(user => {
-                        console.log('starting a new loop with this user: ', user)
                         if (parseInt(user.id) !== parseInt(this.props.loggedInUser.id)){
                             let userLikeCounter = {}
                             user.attributes.likes.map(likeObj => {
                                 userLikeCounter[likeObj.restaurant_id] = true
                             })
             
-                            console.log('user like counter: ', userLikeCounter)
                             let sameLikes = 0
                             for (let key in myLikeCounter) {
                                 if (key in userLikeCounter){
                                     sameLikes += 1
                                 }
                                 if (sameLikes > 1) {
-                                    console.log('user before i add it to mybuds in state: ', user)
                                     if (!(this.state.myBuds.includes(user))){
                                         this.setState({
                                             myBuds: [...this.state.myBuds, user]

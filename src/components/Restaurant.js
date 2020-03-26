@@ -35,7 +35,6 @@ class Restaurant extends React.Component {
     }
 
     handleLike = () => {
-        console.log("clicking like button")
         fetch('http://localhost:3000/api/v1/likes', {
             method: 'POST',
             headers: {
@@ -51,7 +50,6 @@ class Restaurant extends React.Component {
               isLiked: true
           }))
     }
-
     
     handleRemoveLike = () => {
         let likeToDelete
@@ -65,7 +63,6 @@ class Restaurant extends React.Component {
             })
             .then(res => {
                 likeToDelete = this.props.allLikes.find(likeObj => (likeObj.attributes.restaurant.restaurant.id === parseInt(this.props.id)) && (likeObj.attributes.user.user.id === parseInt(this.props.loggedInUser.id)))
-                console.log('liketodelete: ', likeToDelete)
                 return likeToDelete;
             })
             .then(likeToDelete => {

@@ -23,11 +23,8 @@ class MyRestaurantsContainer extends React.Component {
                         return likeObj.attributes.restaurant.restaurant.id
                     })
                 }
-
                 if (myLikes.length > 0){
-
                     if (this.props.allRestaurants){
-
                         return this.props.allRestaurants.filter(restaurantObj => myLikes.includes(parseInt(restaurantObj.id)))
                     } 
                 }
