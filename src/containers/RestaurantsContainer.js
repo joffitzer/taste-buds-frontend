@@ -2,13 +2,12 @@ import React from 'react'
 import { connect as cnx } from 'react-redux';
 import Restaurant from '../components/Restaurant'
 
-class RestaurantsContainer extends React.Component {
-    render(){
+function RestaurantsContainer (props) {
 
         let restaurants;
 
-        if (this.props.allRestaurants){
-            restaurants = this.props.allRestaurants.map(restaurantObj => {
+        if (props.allRestaurants){
+            restaurants = props.allRestaurants.map(restaurantObj => {
             return <Restaurant id={restaurantObj.id} restaurant={restaurantObj.attributes} key={restaurantObj.id}/>
         })} 
 
@@ -18,7 +17,6 @@ class RestaurantsContainer extends React.Component {
                 {restaurants}
             </div>
         )
-    }
 }
 
 const mapStateToProps = (state) => {

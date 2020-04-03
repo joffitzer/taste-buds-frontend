@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { connect as cnx } from 'react-redux';
 import { getLikes } from '../actionCreators'
 

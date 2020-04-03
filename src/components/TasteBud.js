@@ -2,7 +2,7 @@ import React from 'react'
 import { connect as cnx } from 'react-redux';
 import Recommendation from '../components/Recommendation'
 
-function TasteBud () {
+function TasteBud (props) {
 
         let likedRestaurantIds = props.user.attributes.likes.map(likeObj => likeObj.restaurant_id)
 
