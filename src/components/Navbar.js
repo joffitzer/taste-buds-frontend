@@ -4,27 +4,24 @@ import { logInUser } from '../actionCreators'
 import {Link} from 'react-router-dom'
 import logo from '../tb-logo-white.png'
 
-class Navbar extends React.Component{
-    
-    render(){
+function Navbar(props) {
 
         let jonah 
-        if (this.props.allUsers) {
-            jonah = this.props.allUsers[0]
+        if (props.allUsers) {
+            jonah = props.allUsers[0]
         } 
 
         return(
             <div class="topnav">
                 <Link to="/"><img class="navlogo" src={logo} alt="logo"/></Link>
                     <div class="navtext">
-                        <Link to="/" onClick={() => this.props.logInUser(jonah)}>Log In as Jonah</Link>
+                        <Link to="/" onClick={() => props.logInUser(jonah)}>Log In as Jonah</Link>
                         <Link to="/restaurants">All Restaurants</Link>
                         <Link to="/my-restaurants">My Liked Restaurants</Link>
                         <Link to="/my-taste-buds">My Taste Buds</Link>
                     </div>
             </div>
         )
-    }
 }
   
 const mapStateToProps = (state) => {
