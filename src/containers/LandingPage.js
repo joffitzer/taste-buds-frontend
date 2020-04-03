@@ -7,7 +7,7 @@ import logo from '../tb-logo-black.png'
 const LandingPage = () => {
     return(
         <div>
-            <img class="center"src={logo} alt="logo"/>
+            <img class="center" src={logo} alt="logo"/>
         </div>
     )
 }

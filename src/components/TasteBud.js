@@ -2,15 +2,13 @@ import React from 'react'
 import { connect as cnx } from 'react-redux';
 import Recommendation from '../components/Recommendation'
 
-class TasteBud extends React.Component {
+function TasteBud () {
 
-    render(){
-
-        let likedRestaurantIds = this.props.user.attributes.likes.map(likeObj => likeObj.restaurant_id)
+        let likedRestaurantIds = props.user.attributes.likes.map(likeObj => likeObj.restaurant_id)
 
         let likedRestaurants
-        if (this.props.allRestaurants){
-            likedRestaurants = this.props.allRestaurants.filter(restaurantObj => (likedRestaurantIds.includes(parseInt(restaurantObj.id))))
+        if (props.allRestaurants){
+            likedRestaurants = props.allRestaurants.filter(restaurantObj => (likedRestaurantIds.includes(parseInt(restaurantObj.id))))
         }
 
         let recommendations
@@ -22,16 +20,15 @@ class TasteBud extends React.Component {
 
         return(
             <div className="tastebuddiv">
-                <h2>{this.props.user.attributes.first_name}</h2>
-                <img className="profilepic" src={this.props.user.attributes.img} alt={this.props.user.attributes.first_name}/>
+                <h2>{props.user.attributes.first_name}</h2>
+                <img className="profilepic" src={props.user.attributes.img} alt={props.user.attributes.first_name}/>
                 <div className="tastebudtext">
-                    <h5> Favorite Cuisine: {this.props.user.attributes.fav_cuisine}</h5>
+                    <h5> Favorite Cuisine: {props.user.attributes.fav_cuisine}</h5>
                     <h5> Recommendations: {recommendations}</h5>      
                 </div>
                 <hr /> 
             </div>
         )
-    }
 }
 
 const mapStateToProps = (state) => {
